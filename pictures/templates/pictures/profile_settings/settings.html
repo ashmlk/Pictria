@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container d-flex justify-content-center">
+    <div class="settings-menu w-100">
+        <div class="row w-100">
+            <div class="col-sm-4 mb-3 menu">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a class="text-dark" href="{% url 'settings-personal' %}">
+                            Personal Information
+                        </a>                     
+                    </li>
+                    <li class="list-group-item">
+                        <a class="text-dark" href="{% url 'settings-privacy' %}">
+                            Privacy
+                        </a>                    
+                    </li>
+                </ul>
+            </div>
+            <div class="co-sm-8 px-3  settings-container ">
+                {% block settings %}
+                <div class="d-flex h-100 w-100 justify-content-center align-items-center">
+                    <div class="content">
+                        <h5 class="text-muted">
+                            Edit your profile and personal information on this page.
+                        </h5>
+                    </div>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

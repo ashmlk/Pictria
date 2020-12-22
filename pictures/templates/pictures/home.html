@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content">
+    <div class="container d-flex justify-content-center tag-container my-3">
+        <div class="row d-flex justify-content-center">
+            {% if tags %}
+            {% for tag in tags %}
+                <div class="m-1">
+                    <a class href="{% url 'image-tags' tag.slug %}">
+                        <button class="btn btn-lg bg-primary-black rounded-corners text-white">
+                            #{{ tag.name }}
+                        </button>
+                    </a>
+                </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    {% if tag_name %}
+    <div class="tag-object">
+        <div class="display-4">
+            <div class="p-2">
+                #{{ tag_name }}
+            </div>
+        </div>
+        {% if related_tags %}
+        <div class="m-2">
+            <span class="text-muted">
+                Related:
+            </span>
+            {% for tag in related_tags %}
+                <a class="mx-1 no-underline"  href="{% url 'image-tags' tag.slug %}">
+                    <button class="btn btn-sm text-white bg-primary-dark rounded-corners">
+                        #{{ tag.name }}
+                    </button>
+                </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endif %}
+    {%  if latest_active %}
+    <input type="hidden" id="profile_latest__page__user" value="1"/>
+    {% endif %}
+    <div class="image-container">
+        <div class="p-2">
+            {% include 'pictures/image_list.html'  with images=images %}
+        </div>
+    </div>
+</div>
+{% endblock %}

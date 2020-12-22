@@ -1,0 +1,98 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Pictria: Share Your Captures{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/shortcuts/infinite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/d3a3fc2f19.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+</head> 
+<body class="d-flex flex-column min-vh-100 ">
+  <div id="navContainer" class="fixed-top bg-white mb-4">{% include 'assets/nav.html' %}</div>
+  <div class="wrapper">
+    <div class="container-fluid main-container">
+      <div class="mb-1 d-block d-md-none r">
+          <div class="search-form">
+            <form autocomplete="xyz" class="my-auto form-inline" action="{% url 'results' %}" method="GET">
+              <div class="d-flex justify-content-center h-100">
+                <div class="d-flex searchbar">
+                  <div style="padding-top:3px;">
+                    <input id="searchbar_n" autocomplete="off" class="mr-5 search_input"
+                      type="search" spellcheck="false" name="q" placeholder="Search {{ search_bar_text }}" />
+                      <div class="border search-query-results">
+                        <ul id="user_results" class="list-group list-group-flush"></ul>
+                        <div class="dropdown-divider"></div>
+                        <ul id="term_results"  class="list-group list-group-flush"></ul>
+                      </div>
+                    <input autocomplete="turnitof" type="hidden" value="top" name="o" />
+                  </div>
+                  <div>
+                    <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="d-flex justify-content-center mt-1">
+            <div class="d-flex">
+              <div>
+                <div class="order-link">
+                  <a class="nav-link" href="{% url 'home' %}">
+                    <button class="btn btn-mid-light rounded-corners {{ top_active }}">
+                      Top
+                    </button>
+                  </a>
+                </div>
+              </div>
+              <div>
+                <div class="order-link">
+                  <a class="nav-link" href="{% url 'most-viewed' %}">
+                    <button class="btn btn-mid-light rounded-corners {{ viewed_active }}">
+                      Most Viewed
+                    </button>
+                  </a>
+                </div>
+              </div>
+              <div>
+              <div class="order-link">
+                <a class="nav-link" href="{% url 'latest' %}">
+                  <button class="btn btn-mid-light rounded-corners {{ latest_active }}">
+                    Latest
+                  </button>
+                </a>
+              </div>
+              </div>  
+            </div>
+               
+        </div>
+      </div>
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+  <div id="footer-main-div"></div>
+  <div class="modal fade" id="modal-image">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="width: 100%; min-width: 400px !important;">
+      <div class="modal-content" style="min-width: 400px !important;"></div>
+    </div>
+  </div>
+  <script src="{% static 'js/dropzone/dist/dropzone.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

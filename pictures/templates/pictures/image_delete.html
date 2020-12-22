@@ -1,0 +1,22 @@
+{% load crispy_forms_tags %}
+{% if request.user == image.author %}
+<form method="POST" data-url="{% url 'image-delete' image.get_hashed_id %}" class="action-image-form" data-img-sc="{{ image.get_class_hashed_id }}">
+	{% csrf_token %}
+		<div class="modal-header border-0 pl-0 pr-0 mb-0">
+		<h5 class="modal-title col-12 text-center" >Delete Image
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+		</button></h5>
+		</div>
+		<div class="modal-body text-center p-0">
+		<p class="mx-1">Are you sure you want to permanently delete your image?</p>
+		</div>
+		<div class="modal-footer border-0">
+			<button type="submit" class="mx-1 btn btn-danger text-center" style="border-radius: 20px;">Delete</button>
+		</div>
+</form>
+{% else %}
+<div class="d-flex justify-content-enter">
+	<h5 class="m-1">There seems to be an error with your request</h5>
+</div>
+{% endif %}

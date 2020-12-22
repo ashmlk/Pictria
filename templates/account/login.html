@@ -1,0 +1,58 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %} 
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<style>input[type="text"]{border-radius: 25px;}[type="password"]{border-radius: 25px;}</style>
+<div class="d-flex justify-content-center col-12 w-100">
+  <div class="container">
+    <div class="row" style="height: 100vh;">
+      <div class="col-lg-5 col-md-7 col-12 mx-auto" style="margin-top:4rem;padding-bottom: 3vh;">
+        <div class="align-items-center text-center mb-4 text-primary-dark" style="font-size: 3rem;font-weight: 700;">
+          Log in to see art...
+        </div>
+        {% if messages %}
+          <div class="mb-2">
+              <div class="d-flex align-items-center">
+                  <div>
+                      {% for message in messages %}
+                      <div class="alert alert-light alert-dismissible fade show" role="alert">
+                        <span {% if message.tags %} {% if message.tags == 'error' %} class="text-danger" {% else %} class="text-{{ message.tags }}" {% endif %} {% endif %}> {{ message }} </span><br>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>                
+                      {% endfor %}
+                  </div>
+              </div>
+          </div>
+      {% endif %}
+        <div class="card-signin my-auto">
+          <div class="card-body mx-4">
+            <form method="POST" action="{% url 'account_login' %}" class="form-signin">
+              {% csrf_token %}
+              {{ form |crispy }}
+              <button type="submit" class="btn mt-3 w-100 btn-md bg-primary-dark no-border" style="border-radius: 25px !important;">
+               <span class="text-white"> Log in</span>
+              </button>
+              <div class="mt-2 text-center" style="color: rgb(182, 184, 185);">or</div>
+              <a class="btn mt-2 w-100 btn-md border rounded" style="border-radius: 25px !important;" href="{% provider_login_url 'google' %}">
+                <img class="google-icon float-left" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/><span style="margin-left:-11px;font-weight: 500;">Log in with Google</span></a>
+              <hr class="my-4">
+              <p>Don't have an account? <a href="{% url 'account_signup' %}" class="text-primary-dark"  id="signup">Sign up</a></p>
+              <a class="text-muted" href="{% url 'account_reset_password' %}"  style="font-size: .9rem;">Forgot Password?</a>
+              {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+<style>label{display: none;}#id_remember{display: none;}</style>
+{% endblock %}

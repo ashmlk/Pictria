@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="d-flex w-100">
+        <div class="w-100">
+            <ul class="w-100 rounded list-group infinite-container">
+                {% for user in users %}
+                <a class="rounded no-underline text-dark" href="{{ user.get_absolute_url }}">
+                    <li class="list-group-item">
+                        <div class="d-flex align-items-center">
+                            <div class="image-profile p-2 mx-1">
+                                <img src="{{ user.get_image_url }}" class="rounded-circle img-fluid" width="55px" height="55px"/>
+                            </div>
+                            <div class="text h6">
+                                <a class="no-underline text-dark" href="{{ user.get_absolute_url }}">
+                                    @{{ user.get_username }}
+                                </a>
+                                <br>
+                                <span>{{ user.get_full_name }}</span>
+                            </div>
+                        </div>
+                    </li>
+                </a>
+                {% empty %}
+                <h6 class="text-center">No results found.</h6>
+                {% endfor %}
+            </ul>
+            {% if images.has_next %}
+                <a class="infinite-more-link" href="?obj=user&page={{ users.next_page_number }}"></a>
+            {% endif %}
+        </div>
+    </div>
+</div>

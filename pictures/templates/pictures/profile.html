@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content">
+    <div class="container d-flex justify-content-center tag-container my-3">
+        <div class="row d-flex justify-content-center">
+            <div>
+                <div class="user_image d-flex justify-content-center my-2">
+                    <img src="{{user.get_image_url}}" class="rounded-circle" width="180px" height="180px"/>
+                </div>
+                <div class="text-center mt-2">
+                    <h4>{{ user.get_full_name }}</h4>
+                    <h6 style="margin-top:-5px;"><a class="text-dark" href="{{ user.get_absolute_url }}">@{{ user.get_username }}</a></h6>
+                    <p>{{ user.bio }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a class="no-underline" href="{{ user.get_absolute_url }}">
+            <div class="d-flex justify-content-center w-100 mb-3">
+                <div class="text-center text-white p-2 px-4 rounded-corners bg-primary-black border-light m-2 image-count-info" style="display: inline-block;">
+                    {{ img_count }}
+                    <br/>
+                    {{  image_count_text }}
+                </div>
+            </div>
+        </a>
+        <a class="no-underline" href="{% url 'view-profile-collections' user.username %}">
+            <div class="d-flex justify-content-center w-100 mb-3">
+                <div class="text-center text-white p-2 px-4 rounded-corners bg-primary-black border-light m-2 image-collections-count-info" style="display: inline-block;">
+                    {{ collection_count }}
+                    <br/>
+                    Collections
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="px-4">
+        <div class="image-container profile__image__container">
+            <div class="p-2">
+                {% include 'pictures/image_list.html'  with images=images %}
+            </div>
+        </div>
+    </div>
+    {% if not is_collection_page %}
+    <input type="hidden" id="profile_latest__page__user" value="1"/>
+    {% elif is_collection_page %}
+    <input type="hidden" id="profile_collections__page__user" value="1"/>
+    {% endif %}
+</div>
+{% endblock %}
+
+

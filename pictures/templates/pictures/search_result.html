@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container my-2 border-bottom pb-1 d-flex justify-content-center">
+    <div class="search-text">
+        <div class="h4">
+            <span>Results for: <span class="h4 font-weight-light text-muted">{{ q }}</span></span>
+        </div>
+        <div class="m-1 d-flex justify-content-center">
+            <a class="btn mr-1  rounded-corners no-underline text-white bg-primary-dark" href="{% url 'results' %}?q={{ q }}&obj=images">
+                Images
+            </a>
+            <a class="btn rounded-corners no-underline text-white bg-primary-dark" href="{% url 'results' %}?q={{ q }}&obj=user">
+                People
+            </a>
+        </div>
+    </div>
+</div>
+{% if images %}
+{% include 'pictures/image_list.html' %}
+{% elif users %}
+{% include 'pictures/user_list.html' %}
+{% endif %}
+{% endblock %}

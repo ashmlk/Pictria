@@ -1,0 +1,50 @@
+{% load crispy_forms_tags %}
+<div class="modal-header border-0">
+    <h5 class="modal-title">{% if is_update %}Update your image{% else %}Create a Collection{% endif %}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+<div class="modal-body pb-2 collection-create-template" style="padding-bottom:20px !important;">
+    <div class="p-1">
+        <form  class="dropzone collection-create-form" data-url="{% url 'create-collection' %}" method="POST" id="my-dropzone" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <div style="height: auto;min-height: 400px;">
+                <div class="form-group">
+                    <input type="text" request name="collection-title" placeholder="Description" maxlength="180" aria-describedby="titleHelp" class="form-control" autocapitalize="none" autocomplete="ss"/>
+                    <small id="titleHelp" class="form-text text-muted">Set a description for your collection</small>
+                </div>               
+                <div class="d-flex justify-content-center h-100 my-1 w-100 align-items-center rounded-corners" style="border: rgb(226, 226, 226) dotted ;height: 20rem !important;" id="add-images">
+                    <div class="h5 text-muted mx-1">
+                        Drop images here or click to upload up to 10 images
+                    </div>    
+                </div>
+                <div class="fallback">
+                    <input name="file" type="file" multiple style="margin-left: 9999px;position: absolute;"/>
+                </div>
+                <div class="row mt-3 p-1" id="preview-selected" style="max-height: 32em !important;overflow-y: auto !important;"></div>
+                  <div id="preview-template" class="mx-auto col-12 dz-preview dz-file-preview" style="display: none;">
+                        <div class="d-flex flex-column align-items-center dz-details border rounded mb-1 mr-1">
+                        <img data-dz-thumbnail/>
+                        </div>
+                        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+                        <div class="dz-success-mark"><span>✔</span></div>
+                        <div class="dz-error-mark"><span>✘</span></div>
+                        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+                  </div>
+            </div>
+            <div class="dz-default dz-message"></div>
+            <div class="my-2" >
+                <div class="float-right" style="margin-bottom: 20px !important;">
+                    <button class="btn rounded-corners bg-secondary-mid-light"  data-dismiss="modal" type="button">
+                        Cancel
+                    </button>
+                    <button class="btn rounded-corners bg-primary-dark collection-post-submit-button" type="submit">
+                        Create
+                    </button>
+                </div>
+            </div>
+            <input type="hidden" name="collection-cover-index" id="collectionCoverIndex" value=""/>
+        </form>
+    </div>
+</div>

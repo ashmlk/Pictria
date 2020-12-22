@@ -1,0 +1,49 @@
+{% extends 'pictures/profile_settings/settings.html' %}
+{% load crispy_forms_tags %}
+{% block settings %}
+<div class="d-flex h-100 w-100 justify-content-center align-items-center">
+    <div class="content">
+        <h5 class="text-muted">
+            Privacy
+        </h5>
+        {% if messages %}
+          <div class="mt-2">
+              <div class="d-flex align-items-center">
+                  <div>
+                      {% for message in messages %}
+                      <div class="alert alert-light alert-dismissible fade show" role="alert">
+                        <span {% if message.tags %} {% if message.tags == 'error' %} class="text-danger" {% else %} class="text-{{ message.tags }}" {% endif %} {% endif %}> {{ message }} </span><br>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>                
+                      {% endfor %}
+                  </div>
+              </div>
+          </div>
+        {% endif %}
+        <div class="link border-bottom w-100 mb-4">
+            <a class="lead" href="{% url 'account_change_password' %}">
+                Change Password
+            </a>
+        </div>
+        <div class="w-100">
+            <form method="POST" class="w-100" action="{% url 'settings-privacy' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row py-2">
+                    <button class="col-12 ml-3 text-white w-100 btn rounded-corners bg-primary-dark" type="submit">Clear Searches</button>
+                </div>
+                <div class="search">
+                    {% for search in searches %}
+                    <div class="search-box">
+                        <p class="h6">
+                            {{ search.text }} - {{ search.timestamp|date:"M d, Y H:i" }}
+                        </p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

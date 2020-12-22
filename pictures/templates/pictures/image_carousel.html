@@ -1,0 +1,26 @@
+<div id="collectionCarouselContainer" class="carousel" data-interval="false" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#collectionCarouselContainer" data-slide-to="0" class="active"></li>
+      {% for image in image.child_images.all %}
+      <li data-target="#collectionCarouselContainer" data-slide-to="{{ forloop.cunter }}"></li>
+      {% endfor %}
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block" src="{{ image.image_photo.url }}" alt="Image by {{ image.author.username }}" >
+      </div>
+      {% for child_image in image.child_images.all %}
+      <div class="carousel-item" style="width:auto;">
+        <img class="d-block" src="{{ child_image.image_photo.url }}" alt="{{ forloop.counter }} Image from {{ child_image.author.get_username }}" >
+      </div>
+      {% endfor %}
+    </div>
+    <a class="carousel-control-prev" href="#collectionCarouselContainer" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon"  aria-hidden="true"></span>
+      <span class="sr-only"  >Previous</span>
+    </a>
+    <a class="carousel-control-next"  href="#collectionCarouselContainer" role="button" data-slide="next">
+      <span class="carousel-control-next-icon"  aria-hidden="true"></span>
+      <span class="sr-only"  >Next</span>
+    </a>
+  </div>

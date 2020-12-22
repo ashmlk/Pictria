@@ -1,0 +1,210 @@
+
+{% load cache %}
+{% load putils %}
+<div class="modal-header border-0 p-0">
+    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true" class="m-2">&times;</span>
+    </button>
+  </div>
+<div class="modal-body px-1 mx-2" >
+    {% if image.unsplash_photo %}
+    {% with image.get_unsplash_image as dict %}
+    <div class="container-fluid image-object-view"> 
+        <div class="row p-0">
+            <div class="col-md-8 p-0 image-obj-photo">  
+                {% cache 86400 image_fragment dict|get_dict_item:"photo_url" %}
+                <img class="card-img-top img-fluid" src="{{ dict|get_dict_item:'photo_image_url' }}" alt="Image shared by {{ image.author.username }}">
+                {% endcache %}        
+            </div>
+            <div class="col-md-4 p-1">
+                <div class="mx-2 p-1">
+                    <h6 class="card-subtitle small mb-2 text-muted">
+                        <span style="margin-top: 5px !important;">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="transform:rotate(60deg);" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                              </svg>
+                        </span>
+                        <span>
+                            By: {{ dict|get_dict_item:"photographer_first_name" }} {{ dict|get_dict_item:"photographer_last_name" }}
+                        </span>           
+                    </h6>
+                    <div class="d-flex">
+                        <div class="mr-1">
+                            <img src="{{ image.author.get_image_url }}" alt="{{ image.author.get_username }}" class="rounded-circle profile-image"/>
+                        </div>
+                        <p class="card-text image-description mx-1">
+                            <a class="text-dark" href="{{ image.author.get_absolute_url }}">@{{ image.author.username }}</a>
+                            <span>{{ image.get_created_on }}</span>
+                            <br>
+                            {% if dict|get_dict_item:"photo_description" != "nan" %}
+                                {{ dict|get_dict_item:"photo_description" }}
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="image-tags tag-container">
+                        {% for tag in image.tags.all %}
+                            <a class="text-dark" href="{% url 'image-tags' tag.slug %}">#{{ tag.name|cut:" " }}</a>
+                        {% endfor %}
+                    </div>
+                    <div class="image-likes p-0 mt-2 mb-3 border-top" style="margin-left: -1.2rem;">
+                        {% include 'pictures/likes.html' with image=image %}
+                    </div>
+                </div>
+                <div class="w-100" style="position:absolute; bottom:0;">
+                    <div class="mx-2 d-flex w-100 pr-2 align-items-center justify-content-between"style="padding-top: 3rem !important;">
+                        <div class="start" >
+                            <div class="align-text-center views-container small">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.134 13.134 0 0 0 1.66 2.043C4.12 11.332 5.88 12.5 8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.134 13.134 0 0 0 14.828 8a13.133 13.133 0 0 0-1.66-2.043C11.879 4.668 10.119 3.5 8 3.5c-2.12 0-3.879 1.168-5.168 2.457A13.133 13.133 0 0 0 1.172 8z"/>
+                                        <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                      </svg>
+                                </span>
+                                <span>
+                                    {{ views }}
+                                </span>
+                            </div>
+                        </div>
+                       <div class="end">
+                            <div class="action-container">
+                                <div class="dropdown dropup float-right m-1">
+                                    <button class="btn bg-secondary-light btn-sm image-object-dropdown-button" style="border-radius:50%;padding-top: 6px;padding-bottom: 6px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-three-dots" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-tip-se image-drop-down-actions mb-4" aria-labelledby="dropdownMenuButton">
+                                        <button class="dropdown-item btn bookmark-image-button" data-url="{% url 'bookmark-image' image.get_hashed_id %}"  style="font-size: 0.92rem;"></button>
+                                        {% if request.user == image.author %}
+                                        <button class="dropdown-item btn action-image-button" data-url="{% url 'edit-image' image.get_hashed_id %}"  style="font-size: 0.92rem;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>
+                                            Edit
+                                        </button>
+                                        <button class="dropdown-item btn action-image-button" data-url="{% url 'image-delete' image.get_hashed_id %}"  style="font-size: 0.92rem;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>
+                                            Delete
+                                        </button>
+                                        {% endif %}
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ image.author.get_absolute_url }}" style="font-size: 0.92rem;">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                </svg>
+                                            </span>
+                                            See {{ image.author.get_username }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+    </div>
+    {% endwith %}
+    {% else %}
+    <div class="container-fluid image-object-view"> 
+        <div class="row p-0">
+            <div class="col-md-8 p-0">
+                {% if not image.is_collection %}
+                {% cache 86400 image_fragment image.image_photo.url %}
+                <img class="card-img-top img-fluid" src="{{ image.image_photo.url }}" alt="Image shared by {{ image.author.username }}">
+                {% endcache %}
+                {% else %}
+                {% include 'pictures/image_carousel.html' with image=image %}
+                {% endif %}
+            </div>
+            <div class="col-md-4 p-1">
+                <div class="mx-2 p-1">
+                    <div class="d-flex">
+                        <div class="mr-1">
+                            <img src="{{ image.author.get_image_url }}" alt="{{ image.author.get_username }}" class="rounded-circle profile-image"/>
+                        </div>
+                        <p class="card-text image-description mx-1">
+                            <a class="text-dark" href="{{ image.author.get_absolute_url }}">@{{ image.author.username }}</a>
+                            <span>{{ image.get_created_on }}</span>
+                            <br>
+                            {% if image.description != None %}
+                                {{ image.description  }}
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="image-tags tag-container">
+                        {% for tag in image.tags.all %}
+                            <a class="text-dark" href="{% url 'image-tags' tag.slug %}">#{{ tag.name|cut:" " }}</a>
+                        {% endfor %}
+                    </div>
+                    <div class="image-likes p-0 mt-2 border-top">
+                        {% include 'pictures/likes.html' with image=image %}
+                    </div>
+                </div>
+                <div class="w-100" style="position:absolute; bottom:0;">
+                    <div class="mx-2 d-flex w-100 pr-2 align-items-center justify-content-between"style="padding-top: 3rem !important;">
+                        <div class="start" >
+                            <div class="align-text-center views-container small">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.134 13.134 0 0 0 1.66 2.043C4.12 11.332 5.88 12.5 8 12.5c2.12 0 3.879-1.168 5.168-2.457A13.134 13.134 0 0 0 14.828 8a13.133 13.133 0 0 0-1.66-2.043C11.879 4.668 10.119 3.5 8 3.5c-2.12 0-3.879 1.168-5.168 2.457A13.133 13.133 0 0 0 1.172 8z"/>
+                                        <path fill-rule="evenodd" d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                      </svg>
+                                </span>
+                                <span>
+                                    {{ views }}
+                                </span>
+                            </div>
+                        </div>
+                       <div class="end">
+                            <div class="action-container">
+                                <div class="dropdown dropup float-right m-1">
+                                    <button class="btn bg-secondary-light btn-sm image-object-dropdown-button" style="border-radius:50%;padding-top: 6px;padding-bottom: 6px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  class="bi bi-three-dots" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-tip-se image-drop-down-actions mb-4" aria-labelledby="dropdownMenuButton">
+                                        <button class="dropdown-item btn bookmark-image-button" data-url="{% url 'bookmark-image' image.get_hashed_id %}"  style="font-size: 0.92rem;"></button>
+                                        {% if request.user == image.author %}
+                                        <button class="dropdown-item btn action-image-button" data-url="{% url 'edit-image' image.get_hashed_id %}"  style="font-size: 0.92rem;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>
+                                            Edit
+                                        </button>
+                                        <button class="dropdown-item btn action-image-button" data-url="{% url 'image-delete' image.get_hashed_id %}"  style="font-size: 0.92rem;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                            </svg>
+                                            Delete
+                                        </button>
+                                        {% endif %}
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ image.author.get_absolute_url }}" style="font-size: 0.92rem;">
+                                            <span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                                </svg>
+                                            </span>
+                                            See {{ image.author.get_username }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
