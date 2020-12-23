@@ -272,6 +272,11 @@ padding: 9px;
 font-size: 0.93rem;
 }
 
+.modal-dialog {
+    width: 100%;
+    min-width: 400px !important;
+}
+
 @media (min-width: 34em) {
     .card-columns {
         -webkit-column-count: 2;
@@ -279,7 +284,10 @@ font-size: 0.93rem;
         column-count: 2;
     }
     .grid-sizer,
-.grid-item { width: 50%; }
+    .grid-item { width: 50%; }
+    .modal-dialog {
+        min-width: 360px !important;
+    }
 }
 
 @media (min-width: 48em) {
@@ -289,7 +297,10 @@ font-size: 0.93rem;
         column-count: 3;
     }
     .grid-sizer,
-.grid-item { width: 33.3333336%; }
+    .grid-item { width: 33.3333336%; }
+    .modal-dialog {
+        min-width: 360px !important;
+    }
 }
 
 @media (min-width: 62em) {
@@ -299,7 +310,7 @@ font-size: 0.93rem;
         column-count: 4;
     }
     .grid-sizer,
-.grid-item { width: 25%; }
+    .grid-item { width: 25%; }
 }
 
 @media (min-width: 75em) {
@@ -309,7 +320,7 @@ font-size: 0.93rem;
         column-count: 5;
     }
     .grid-sizer,
-.grid-item { width: 20%; }
+    .grid-item { width: 20%; }
 }
 
 .image-object:hover {
