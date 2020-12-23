@@ -272,13 +272,6 @@ padding: 9px;
 font-size: 0.93rem;
 }
 
-.modal-dialog {
-    width: 100%;
-    min-width: 400px !important;
-}
-.modal-content {
-    min-width: 400px !important;
-}
 @media (min-width: 34em) {
     .card-columns {
         -webkit-column-count: 2;
@@ -287,9 +280,7 @@ font-size: 0.93rem;
     }
     .grid-sizer,
     .grid-item { width: 50%; }
-    .modal-dialog, .modal-content {
-        min-width: 360px !important;
-    }
+
 }
 
 @media (min-width: 48em) {
@@ -300,9 +291,7 @@ font-size: 0.93rem;
     }
     .grid-sizer,
     .grid-item { width: 33.3333336%; }
-    .modal-dialog, .modal-content {
-        min-width: 360px !important;
-    }
+
 }
 
 @media (min-width: 62em) {
@@ -339,15 +328,7 @@ text-decoration: none !important;
 }
 
 #modal-image .modal-content {
-
-    position: relative;
-    margin: auto;
-    padding: 0;
-    width: auto;
-    display: table;
     border-radius: 15px;
-    height: auto;
-    z-index: 9999;
 }
 
 .image-likes, .modal-header .btn:focus {
