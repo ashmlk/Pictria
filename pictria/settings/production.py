@@ -7,6 +7,8 @@ import dj_database_url
 
 # production environment settings
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 DEBUG = False
 
 ALLOWED_HOSTS = ['pictria.herokuapp.com']
