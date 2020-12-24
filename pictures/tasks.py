@@ -5,7 +5,7 @@ Currently there are no unscheduled tasks - minimizing dyno usage on Heroku
 """
 
 from __future__ import absolute_import, unicode_literals
-from register.celery import app
+from pictures.celery import app
 from django.core import serializers
 import celery
 from celery import shared_task
