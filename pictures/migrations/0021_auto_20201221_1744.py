@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('pictures', '0020_auto_20201221_0518'),
-    ]
+    dependencies = [("pictures", "0020_auto_20201221_0518")]
 
     operations = [
         migrations.AlterField(
-            model_name='images',
-            name='is_collection',
+            model_name="images",
+            name="is_collection",
             field=models.BooleanField(blank=True, default=False, null=True),
-        ),
+        )
     ]

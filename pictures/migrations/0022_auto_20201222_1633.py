@@ -7,19 +7,31 @@ import functools
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('pictures', '0021_auto_20201221_1744'),
-    ]
+    dependencies = [("pictures", "0021_auto_20201221_1744")]
 
     operations = [
         migrations.AlterField(
-            model_name='images',
-            name='image_photo',
-            field=models.ImageField(blank=True, upload_to=functools.partial(django_uuid_upload._upload_to_uuid_impl, *(), **{'make_dir': False, 'path': 'users_images/', 'remove_qs': True})),
+            model_name="images",
+            name="image_photo",
+            field=models.ImageField(
+                blank=True,
+                upload_to=functools.partial(
+                    django_uuid_upload._upload_to_uuid_impl,
+                    *(),
+                    **{"make_dir": False, "path": "users_images/", "remove_qs": True}
+                ),
+            ),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='profile_image',
-            field=models.ImageField(blank=True, upload_to=functools.partial(django_uuid_upload._upload_to_uuid_impl, *(), **{'make_dir': False, 'path': 'profile_image/', 'remove_qs': True})),
+            model_name="profile",
+            name="profile_image",
+            field=models.ImageField(
+                blank=True,
+                upload_to=functools.partial(
+                    django_uuid_upload._upload_to_uuid_impl,
+                    *(),
+                    **{"make_dir": False, "path": "profile_image/", "remove_qs": True}
+                ),
+            ),
         ),
     ]

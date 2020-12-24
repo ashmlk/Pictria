@@ -6,46 +6,83 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('pictures', '0003_auto_20201219_0237'),
-    ]
+    dependencies = [("pictures", "0003_auto_20201219_0237")]
 
     operations = [
         migrations.CreateModel(
-            name='UnsplashPhotos',
+            name="UnsplashPhotos",
             fields=[
-                ('photo_id', models.CharField(max_length=255, primary_key=True, serialize=False, unique=True)),
-                ('photo_url', models.CharField(max_length=255, null=True)),
-                ('photo_image_url', models.CharField(max_length=255, null=True)),
-                ('photo_submitted_at', models.DateTimeField(auto_now=True)),
-                ('photo_featured', models.BooleanField(blank=True, default=True)),
-                ('photo_description', models.TextField()),
-                ('photographer_username', models.CharField(max_length=255, null=True)),
-                ('photographer_first_name', models.CharField(max_length=255, null=True)),
-                ('photographer_last_name', models.CharField(max_length=255, null=True)),
-                ('photo_location_name', models.CharField(max_length=255, null=True)),
-                ('photo_location_country', models.CharField(max_length=255, null=True)),
-                ('photo_location_city', models.CharField(max_length=255, null=True)),
-                ('ai_description', models.CharField(max_length=255, null=True)),
-                ('ai_primary_landmark_name', models.CharField(max_length=255, null=True)),
+                (
+                    "photo_id",
+                    models.CharField(
+                        max_length=255, primary_key=True, serialize=False, unique=True
+                    ),
+                ),
+                ("photo_url", models.CharField(max_length=255, null=True)),
+                ("photo_image_url", models.CharField(max_length=255, null=True)),
+                ("photo_submitted_at", models.DateTimeField(auto_now=True)),
+                ("photo_featured", models.BooleanField(blank=True, default=True)),
+                ("photo_description", models.TextField()),
+                ("photographer_username", models.CharField(max_length=255, null=True)),
+                (
+                    "photographer_first_name",
+                    models.CharField(max_length=255, null=True),
+                ),
+                ("photographer_last_name", models.CharField(max_length=255, null=True)),
+                ("photo_location_name", models.CharField(max_length=255, null=True)),
+                ("photo_location_country", models.CharField(max_length=255, null=True)),
+                ("photo_location_city", models.CharField(max_length=255, null=True)),
+                ("ai_description", models.CharField(max_length=255, null=True)),
+                (
+                    "ai_primary_landmark_name",
+                    models.CharField(max_length=255, null=True),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='UnsplashKeywords',
+            name="UnsplashKeywords",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('keyword', models.TextField()),
-                ('ai_service_1_confidence', models.FloatField()),
-                ('ai_service_2_confidence', models.FloatField()),
-                ('photo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pictures.UnsplashPhotos')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("keyword", models.TextField()),
+                ("ai_service_1_confidence", models.FloatField()),
+                ("ai_service_2_confidence", models.FloatField()),
+                (
+                    "photo",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="pictures.UnsplashPhotos",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='UnsplashCollections',
+            name="UnsplashCollections",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('photo_collected_at', models.DateTimeField(auto_now_add=True)),
-                ('photo', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pictures.UnsplashPhotos')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("photo_collected_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "photo",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="pictures.UnsplashPhotos",
+                    ),
+                ),
             ],
         ),
     ]

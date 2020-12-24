@@ -6,21 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pictures', '0002_unsplashcollections_unsplashkeywords_unsplashphotos'),
+        ("pictures", "0002_unsplashcollections_unsplashkeywords_unsplashphotos")
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='unsplashkeywords',
-            name='photo',
-        ),
-        migrations.DeleteModel(
-            name='UnsplashCollections',
-        ),
-        migrations.DeleteModel(
-            name='UnsplashKeywords',
-        ),
-        migrations.DeleteModel(
-            name='UnsplashPhotos',
-        ),
+        migrations.RemoveField(model_name="unsplashkeywords", name="photo"),
+        migrations.DeleteModel(name="UnsplashCollections"),
+        migrations.DeleteModel(name="UnsplashKeywords"),
+        migrations.DeleteModel(name="UnsplashPhotos"),
     ]

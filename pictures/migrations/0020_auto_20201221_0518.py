@@ -6,19 +6,23 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('pictures', '0019_auto_20201220_2206'),
-    ]
+    dependencies = [("pictures", "0019_auto_20201220_2206")]
 
     operations = [
         migrations.AddField(
-            model_name='images',
-            name='is_collection',
+            model_name="images",
+            name="is_collection",
             field=models.BooleanField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='images',
-            name='parent_image',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='child_images', to='pictures.Images'),
+            model_name="images",
+            name="parent_image",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="child_images",
+                to="pictures.Images",
+            ),
         ),
     ]

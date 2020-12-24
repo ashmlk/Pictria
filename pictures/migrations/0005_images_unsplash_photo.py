@@ -7,13 +7,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pictures', '0004_unsplashcollections_unsplashkeywords_unsplashphotos'),
+        ("pictures", "0004_unsplashcollections_unsplashkeywords_unsplashphotos")
     ]
 
     operations = [
         migrations.AddField(
-            model_name='images',
-            name='unsplash_photo',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='unsplash_image', to='pictures.UnsplashPhotos'),
-        ),
+            model_name="images",
+            name="unsplash_photo",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="unsplash_image",
+                to="pictures.UnsplashPhotos",
+            ),
+        )
     ]

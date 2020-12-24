@@ -17,18 +17,23 @@ def set_username(sender, instance, **kwargs):
             rand = random.getrandbits(64)
             username = "user" + str(rand)
         instance.username = username
-        
+
+
 # after editing a profile update the search vector with new instances
 @receiver(post_save, sender=Profile)
 def update_search_vector_profile(sender, instance, **kwargs):
-    Profile.objects.filter(pk=instance.pk).update(sv=SearchVector('username','first_name','last_name'))
-    
+    Profile.objects.filter(pk=instance.pk).update(
+        sv=SearchVector("username", "first_name", "last_name")
+    )
+
+
 # after saving an instance of Image, update the search vector with new instances
 @receiver(post_save, sender=Images)
 def update_search_vector_profile(sender, instance, **kwargs):
-    Images.objects.filter(pk=instance.pk).update(sv=SearchVector('description'))
+    Images.objects.filter(pk=instance.pk).update(sv=SearchVector("description"))
+
 
 # when a new tag is created remove spaces from the tag and convert to lowercase
 @receiver(post_save, sender=Tag)
 def update_tag_name(sender, instance, **kwargs):
-    instance.name = instance.name.replace(" ","").lower()
+    instance.name = instance.name.replace(" ", "").lower()

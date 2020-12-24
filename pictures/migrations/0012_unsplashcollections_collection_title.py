@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('pictures', '0011_auto_20201219_0316'),
-    ]
+    dependencies = [("pictures", "0011_auto_20201219_0316")]
 
     operations = [
         migrations.AddField(
-            model_name='unsplashcollections',
-            name='collection_title',
+            model_name="unsplashcollections",
+            name="collection_title",
             field=models.TextField(null=True),
-        ),
+        )
     ]

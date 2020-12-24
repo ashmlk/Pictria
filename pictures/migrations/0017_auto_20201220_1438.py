@@ -7,19 +7,28 @@ import functools
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('pictures', '0016_auto_20201219_2314'),
-    ]
+    dependencies = [("pictures", "0016_auto_20201219_2314")]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='profile_image',
-            field=models.ImageField(blank=True, upload_to=functools.partial(django_uuid_upload._upload_to_uuid_impl, *(), **{'make_dir': False, 'path': 'profile_image/profiles/', 'remove_qs': True})),
+            model_name="profile",
+            name="profile_image",
+            field=models.ImageField(
+                blank=True,
+                upload_to=functools.partial(
+                    django_uuid_upload._upload_to_uuid_impl,
+                    *(),
+                    **{
+                        "make_dir": False,
+                        "path": "profile_image/profiles/",
+                        "remove_qs": True,
+                    }
+                ),
+            ),
         ),
         migrations.AddField(
-            model_name='unsplashkeywords',
-            name='suggested_by_user',
+            model_name="unsplashkeywords",
+            name="suggested_by_user",
             field=models.BooleanField(blank=True, default=True),
         ),
     ]
