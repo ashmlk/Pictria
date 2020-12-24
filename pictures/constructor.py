@@ -192,9 +192,7 @@ def rand_views():
         for p in Profile.objects.filter(id__in=rand_profiles):
             i.views.add(p)
 
-def random_tags():
-    
-
+ 
 # fix dummy username to be related to user
 def fix_usernames():
     for p in Profile.objects.all():
