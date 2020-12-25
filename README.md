@@ -1,6 +1,6 @@
 # Pictria
 
-**[Pictria]** is a web application inspired by [Pinterest] for sharing images and Collections (Multiple images at once). With the ability to Bookmark favourite images and like images as well.
+**[Pictria]** is a web application for sharing images and Collections (Multiple images at once). With the ability to Bookmark favourite images and like images as well.
 
 > Pictria uses Heroku as a PaaS to run. The application runs on free Dyno's, which 
 > go to sleep every 30 minutes of inactivity. In that case, please allow 10 seconds for the Dyno's to restart
@@ -32,8 +32,6 @@ Pictria uses a number of frameworks:
 * [Twitter Bootstrap] - great UI boilerplate for modern web apps
 
 
-
-   [pinterest]: <https://www.pinterest.com >
    [pictria]: <https://pictria.herokuapp.com>
    [Django (Python)]: <https://www.djangoproject.com/>
    [PostgreSQL]: <https://www.djangoproject.com/>
