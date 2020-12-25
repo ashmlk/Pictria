@@ -20,5 +20,11 @@
 {% include 'pictures/image_list.html' %}
 {% elif users %}
 {% include 'pictures/user_list.html' %}
+{% else %}
+<div class="d-flex justify-content-center">
+    <div class="h6 p-3">
+        No results found.
+    </div>
+</div>
 {% endif %}
 {% endblock %}
