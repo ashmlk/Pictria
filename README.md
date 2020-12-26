@@ -45,5 +45,5 @@ Pictria uses a number of frameworks:
    
 ### Example screen shoots and examples
 
-![image demo 1]()
-![image demo 2]()
+![image demo 1](https://github.com/ashmlk/Pictria/blob/master/image_demo_1.png)
+![image demo 2](https://github.com/ashmlk/Pictria/blob/master/image_demo_2.png)
