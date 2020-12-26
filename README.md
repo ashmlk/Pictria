@@ -3,9 +3,13 @@
 **[Pictria]** is a web application for sharing images and Collections (Multiple images at once). With the ability to Bookmark favourite images and like images as well.
 
 > Pictria uses Heroku as a PaaS to run. The application runs on free Dyno's, which 
-> go to sleep every 30 minutes of inactivity. In that case, please allow 10 seconds for the Dyno's to restart
-> and run again. 
+> go to sleep every 30 minutes of inactivity. In that case, please allow 10 seconds for the Dyno's to restart and load the website.
 > The application also uses the free PostgreSQL tier on Heroku, which has a 10,000-row limit. Therefore, for demo purposes, the data is minimized as much as possible
+
+### Data and API's
+
+The inital data for this project was retrieved from [Unsplash API], which contains 25,000 images (Lite Version) including their tags, location, author and many other criteria.
+The images and their relevant tags was used for populating the inital data for [Pictra]
 
 ### Motivation
 
@@ -22,7 +26,7 @@ This project's goal was to have an in-depth exploration of how companies like [P
   - Add tags to your images 
   - Pages that contain the top, most, viewed and latest images from accross the website
   
-### Tech Stack
+### Tech
 
 Pictria uses a number of frameworks:
 
@@ -35,9 +39,11 @@ Pictria uses a number of frameworks:
    [pictria]: <https://pictria.herokuapp.com>
    [Django (Python)]: <https://www.djangoproject.com/>
    [PostgreSQL]: <https://www.djangoproject.com/>
-
+   [Unsplash API]: <https://unsplash.com/developers>
    [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
    [jQuery]: <http://jquery.com>
    
 ### Example screen shoots and examples
 
+![image demo 1]()
+![image demo 2]()
