@@ -6,7 +6,7 @@
 > go to sleep every 30 minutes of inactivity. In that case, please allow 10 seconds for the Dyno's to restart and load the website.
 > The application also uses the free PostgreSQL tier on Heroku, which has a 10,000-row limit. Therefore, for demo purposes, the data is minimized as much as possible
 
-### Data and API's
+### Datasets and API's
 
 The inital data for this project was retrieved from [Unsplash API], which contains 25,000 images (Lite Version) including their tags, location, author and many other criteria.
 The images and their relevant tags was used for populating the inital data for [Pictra]
