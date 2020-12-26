@@ -9,7 +9,7 @@
 ### Datasets and API's
 
 The inital data for this project was retrieved from [Unsplash API], which contains 25,000 images (Lite Version) including their tags, location, author and many other criteria.
-The images and their relevant tags was used for populating the inital data for [Pictra]
+The images and their relevant tags was used for populating the inital data for [Pictria]
 
 ### Motivation
 
